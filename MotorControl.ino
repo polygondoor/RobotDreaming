@@ -2,6 +2,9 @@
  * Handles the motors
  */
 
+// wheel diameter of robot
+float wheelDiam = 79;
+
 // Default configurations for stepper motor control
 float maxSpeedLeft = 400;
 float accelerationLeft = 100;
@@ -40,11 +43,50 @@ void captureSettings() {
   stepper_l.moveTo(steps);
 }
 
-void arc(int d_left, int d_right, int time){
-  //stepper.setMaxSpeed(50);     
-  //stepper.setSpeed(50);        
 
-  //stepper.runSpeed();
+float speed_l;
+float speed_r;
+/*
+ * Allows programing the Artbot by defining how far each wheel will move
+ * Both wheels are moved that distance within the same time frame
+ */
+void turn_wheels_mm(long distance_l, long distance_r, float top_speed){
+
+  // calculate if there is a differential in the speeds
+  if (abs(distance_l) >= abs(distance_r) ) {
+    speed_l = top_speed;
+    speed_r = top_speed * ((float)abs(distance_r) / (float)abs(distance_l));
+  } else {
+    speed_r = top_speed;
+    speed_l = top_speed * ((float)abs(distance_l) / (float)abs(distance_r));
+  }
+
+  // translate distance into steps
+  stepper_l.setMaxSpeed(speed_l);    
+  stepper_l.setAcceleration(100000);
+  stepper_r.setMaxSpeed(speed_r);    
+  stepper_r.setAcceleration(100000);
+
+  stepper_l.moveTo(distanceToSteps(distance_l));
+  stepper_r.moveTo(distanceToSteps(distance_r));
+
+  // Could make the check "> 1" so that the infinitesimal stop is not perceivable
+  while(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
+    stepper_l.run();
+    stepper_r.run();
+  }
+
+  // reset the steppers to position 0
+  stepper_r.setCurrentPosition(0);
+  stepper_l.setCurrentPosition(0);
+}
+
+void turn_wheels_mm(int distance_l, int distance_r){
+  turn_wheels_mm( distance_l, distance_r, 400.0);
+}
+
+long distanceToSteps(long mm) {
+  return mm * 2048 / (wheelDiam * 3.1416);
 }
 
 /*

@@ -23,9 +23,6 @@ void setupDisplay(){
   OLEDScreen.setCursor(20, 45);
   OLEDScreen.print("Hello :)"); //this copies some text to the screens memory
   OLEDScreen.display();
-
-  // TODO: Can we remove this?
-  OLEDScreen.setTextSize(3);
 }
 
 /*

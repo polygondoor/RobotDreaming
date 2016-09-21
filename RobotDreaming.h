@@ -38,6 +38,12 @@ long setting_right_wheel_speed = 25;	// arbitrary scale
 long setting_left_wheel_speed = 35;		// in mm
 long setting_left_wheel_distance = 100;	// arbitrary scale
 
+// button pin positions
+int buttonStart = 23;
+int buttonPresets = 27;
+int buttonIncrement = 25;
+int buttonMode = 27;
+
 // Many values are required for the action of the rotary controllers
 // TODO: Can these be abstracted out to a separate class or file?
 int rotaryEncoder1_set_clkPin = 49;
@@ -51,7 +57,4 @@ int rotaryEncoder1_previousRead_clkPin;
 int sensor1pin;
 // TODO: explain
 int rotaryMode = 0;
-
-// see notes in UserInterfaceControl - wheel diameter of robot
-float wheelDiam = 79;
 

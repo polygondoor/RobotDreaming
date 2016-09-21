@@ -56,10 +56,13 @@ void mode1_loop(){
     }
     stepper_r.run();
     stepper_l.run();
-    if (digitalRead(buttonStop) == LOW) {
+
+    if (digitalRead(buttonStart) == LOW) {
+      message("Stop!");
       // stop and reset
       stopAndResetSteppers();
       report();
     }
+
   }
 }
