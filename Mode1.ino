@@ -1,18 +1,13 @@
-void mode1(){
+// TODO: this needs a clearer name
+int increment = 1;
+
+// Allows knowing if the steppers are currently activated or just waiting.
+boolean isDrawing = false;
+
+void mode1_loop(){
   
   if (!isDrawing) {
     readRotaryEncoders();
-
-    // TODO: remove test code (perhaps after IR is working)
-    /*
-      digitalWrite(23, 255);
-      sensor1pin = analogRead(23);
-      message(analogRead(1) );
-
-      Serial.print("sensor1:");
-      Serial.println(sensor1pin);
-      delay(100);
-    */
 
     // See if mode button has been pressed
     // This controls which value will be modified by the knob
@@ -50,23 +45,17 @@ void mode1(){
       captureSettings();
     }
 
-    if (digitalRead(buttonMode) == LOW) {
-
-      drawMode = (drawMode + 1) % numberOfModes;
-
-    }
-
   } else {
-    if (stepper1.distanceToGo() == 0) {
+    if (stepper_r.distanceToGo() == 0) {
       // Reset the whole device (but user needs to wait till wheel bounces)
       // TODO: Use a parameter, not a value in the digitalRead param
-      stepper1.moveTo(-stepper1.currentPosition());
+      stepper_r.moveTo(-stepper_r.currentPosition());
     }
-    if (stepper2.distanceToGo() == 0) {
-      stepper2.moveTo(-stepper2.currentPosition());
+    if (stepper_l.distanceToGo() == 0) {
+      stepper_l.moveTo(-stepper_l.currentPosition());
     }
-    stepper1.run();
-    stepper2.run();
+    stepper_r.run();
+    stepper_l.run();
     if (digitalRead(buttonStop) == LOW) {
       // stop and reset
       stopAndResetSteppers();

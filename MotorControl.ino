@@ -1,6 +1,13 @@
 /* 
  * Handles the motors
  */
+
+// Default configurations for stepper motor control
+float maxSpeedLeft = 400;
+float accelerationLeft = 100;
+
+float maxSpeedRight = 400;
+float accelerationRight = 100;
  
 // register the number of steps by processing the captured settings
 long steps = 0;
@@ -18,19 +25,26 @@ void captureSettings() {
   // given that 1 turn is 2048 steps then
   // turns in steps = 2048 * configuredDistance / (wheelDiam * 3.1416)
 
-  // RIGHT WHEEL (knobs 1 and 2 (speed))
-  stepper1.setMaxSpeed(rotaryEncoder2_positionCount * 10); // max 400
-  stepper1.setAcceleration(accelerationRight);
+  // RIGHT WHEEL 
+  stepper_r.setMaxSpeed(setting_right_wheel_speed * 10); // max 400
+  stepper_r.setAcceleration(accelerationRight);
   // calculate how many steps to go (here we divide by 2 because the bounce goes fowards and backwards)
-  steps = (rotaryEncoder1_positionCount * 2048 / (wheelDiam * 3.1416) / 2);
-  stepper1.moveTo(steps);
+  steps = (setting_right_wheel_distance * 2048 / (wheelDiam * 3.1416) / 2);
+  stepper_r.moveTo(steps);
   // message(String(steps) );
 
-  // LEFT WHEEL (knobs 4 and 3(speed))
-  stepper2.setMaxSpeed(rotaryEncoder3_positionCount * 10); // max 400
-  stepper2.setAcceleration(accelerationLeft);
-  steps = (rotaryEncoder4_positionCount * 2048 / (wheelDiam * 3.1416) / 2);
-  stepper2.moveTo(steps);
+  // LEFT WHEEL 
+  stepper_l.setMaxSpeed(setting_left_wheel_speed * 10); // max 400
+  stepper_l.setAcceleration(accelerationLeft);
+  steps = (setting_left_wheel_distance * 2048 / (wheelDiam * 3.1416) / 2);
+  stepper_l.moveTo(steps);
+}
+
+void arc(int d_left, int d_right, int time){
+  //stepper.setMaxSpeed(50);     
+  //stepper.setSpeed(50);        
+
+  //stepper.runSpeed();
 }
 
 /*
@@ -38,14 +52,14 @@ void captureSettings() {
  */
 void stopAndResetSteppers() {
   // stop everything
-  stepper1.stop(); // Stop as fast as possible: sets new target
-  stepper1.runToPosition();
-  stepper2.stop(); // Stop as fast as possible: sets new target
-  stepper2.runToPosition();
+  stepper_r.stop(); // Stop as fast as possible: sets new target
+  stepper_r.runToPosition();
+  stepper_l.stop(); // Stop as fast as possible: sets new target
+  stepper_l.runToPosition();
 
   // reset the steppers to position 0
-  stepper1.setCurrentPosition(0);
-  stepper2.setCurrentPosition(0);
+  stepper_r.setCurrentPosition(0);
+  stepper_l.setCurrentPosition(0);
 
   // tell the system that we are no longer drawing
   isDrawing = false;

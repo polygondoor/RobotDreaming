@@ -2,6 +2,8 @@
   Handles the OLED display objects
 */
 
+Adafruit_SSD1306 OLEDScreen(4); //OLED_RESET
+
 void setupDisplay(){
   // Initialise the OLED display
   // Note: it is necessary to change a value in the Adafruit_SSD1306 library to set the screen size to 128x64
@@ -49,54 +51,54 @@ void report() {
   if (rotaryMode == 0) {
     OLEDScreen.setTextColor(0);
     OLEDScreen.fillRect(68, 48, 62, 26, 1);
-    OLEDScreen.print(rotaryEncoder1_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
     OLEDScreen.setTextColor(1);
     OLEDScreen.setCursor(70, 12);
-    OLEDScreen.print(rotaryEncoder2_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setCursor(0, 12);
-    OLEDScreen.print(rotaryEncoder3_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setCursor(0, 50);
-    OLEDScreen.print(rotaryEncoder4_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
 
   } else if (rotaryMode == 1) {
     
-    OLEDScreen.print(rotaryEncoder1_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
     OLEDScreen.setCursor(70, 12);
     OLEDScreen.fillRect(68,12, 62, 16, 1);
     OLEDScreen.setTextColor(0);
-    OLEDScreen.print(rotaryEncoder2_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setTextColor(1);
     OLEDScreen.setCursor(0, 12);
-    OLEDScreen.print(rotaryEncoder3_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setCursor(0, 50);
-    OLEDScreen.print(rotaryEncoder4_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
 
   } else if (rotaryMode == 2) {
     
-    OLEDScreen.print(rotaryEncoder1_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
     OLEDScreen.setTextColor(1);
     OLEDScreen.setCursor(70, 12);
-    OLEDScreen.print(rotaryEncoder2_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setCursor(0, 12);
     OLEDScreen.fillRect(0,12,62,16, 1);
     OLEDScreen.setTextColor(0);
-    OLEDScreen.print(rotaryEncoder3_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setTextColor(1);
     OLEDScreen.setCursor(0, 50);
-    OLEDScreen.print(rotaryEncoder4_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
 
   } else if (rotaryMode == 3) {
    
-    OLEDScreen.print(rotaryEncoder1_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
     OLEDScreen.setTextColor(1);
     OLEDScreen.setCursor(70, 12);
-    OLEDScreen.print(rotaryEncoder2_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setCursor(0, 12);
-    OLEDScreen.print(rotaryEncoder3_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
     OLEDScreen.setCursor(0, 50);
     OLEDScreen.fillRect(0, 46 , 62, 20, 1);
     OLEDScreen.setTextColor(0);
-    OLEDScreen.print(rotaryEncoder4_positionCount); //this copies some text to the screens memory
+    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
     OLEDScreen.setTextColor(1);
     
   }
@@ -135,15 +137,15 @@ void displayStartMessage() {
 
   OLEDScreen.setTextSize(1);
   OLEDScreen.setCursor(0, 0);
-  OLEDScreen.print(rotaryEncoder3_positionCount); //this copies some text to the screens memory
+  OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
   OLEDScreen.setCursor(110, 0);
-  OLEDScreen.print(rotaryEncoder2_positionCount); //this copies some text to the screens memory
+  OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
 
   OLEDScreen.setCursor(0, 50);
-  OLEDScreen.print(rotaryEncoder4_positionCount); //this copies some text to the screens memory
+  OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
 
   OLEDScreen.setCursor(110, 50);
-  OLEDScreen.print(rotaryEncoder1_positionCount); //this copies some text to the screens memory
+  OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
 
   OLEDScreen.display();
 }

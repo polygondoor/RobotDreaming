@@ -9,5 +9,5 @@ void setup()
 }
 
 void loop() {
-  mode1();
+  mode1_loop();
 }
