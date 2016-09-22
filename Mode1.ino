@@ -1,5 +1,5 @@
-// TODO: this needs a clearer name
-int increment = 1;
+// holds the increment amount that the rotary controller uses
+int rotary_increment = 1;
 
 // Allows knowing if the steppers are currently activated or just waiting.
 boolean isDrawing = false;
@@ -9,36 +9,45 @@ void mode1_loop(){
   if (!isDrawing) {
     readRotaryEncoders();
 
-    // See if mode button has been pressed
-    // This controls which value will be modified by the knob
+    // Choose parameter. This controls which value will be modified by the knob
     if (digitalRead(rotaryEncoder1_set_btnPin) == LOW) {
       rotaryMode = (rotaryMode + 1) % 4;
       report();
       delay(500);
     }
 
-    // push button to change increment
-    // TODO: Use a parameter, not a value in the digitalRead param
+    // Choose preset
+    if (digitalRead(buttonPresets) == LOW) {
+      // change preset
+
+      // increment preset number
+
+      // check if at end of preset length
+
+      // display new settings on little screen
+      report();
+    }
+
+    // Change increment.
     if (digitalRead(buttonIncrement) == LOW) {
-      if (increment == 1) {
-        increment = 10;
+      if (rotary_increment == 1) {
+        rotary_increment = 10;
         message("Increment 10");
       }
-      else if (increment == 10) {
-        increment = 100; message("Increment 100");
+      else if (rotary_increment == 10) {
+        rotary_increment = 100; message("Increment 100");
       }
-      else if (increment == 100) {
-        increment = 1000; message("Increment 1000");
+      else if (rotary_increment == 100) {
+        rotary_increment = 1000; message("Increment 1000");
       }
-      else if (increment == 1000) {
-        increment = 1; message("Increment 1");
+      else if (rotary_increment == 1000) {
+        rotary_increment = 1; message("Increment 1");
       }
       delay(500);
       report();
     }
 
-    // Push button to start
-    // TODO: Use a parameter, not a value in the digitalRead param
+    // Push to start
     if (digitalRead(buttonStart) == LOW) {
       isDrawing = true;
       displayStartMessage();
@@ -47,19 +56,19 @@ void mode1_loop(){
 
   } else {
     if (stepper_r.distanceToGo() == 0) {
-      // Reset the whole device (but user needs to wait till wheel bounces)
-      // TODO: Use a parameter, not a value in the digitalRead param
+      // Bounce the right wheel direction
       stepper_r.moveTo(-stepper_r.currentPosition());
     }
     if (stepper_l.distanceToGo() == 0) {
+      // Bounce the left wheel direction
       stepper_l.moveTo(-stepper_l.currentPosition());
     }
     stepper_r.run();
     stepper_l.run();
 
+    // Push to stop
     if (digitalRead(buttonStart) == LOW) {
       message("Stop!");
-      // stop and reset
       stopAndResetSteppers();
       report();
     }

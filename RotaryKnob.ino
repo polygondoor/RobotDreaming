@@ -21,34 +21,34 @@ void readRotaryEncoders() {
     if (rotaryEncoder1_read_dtPin == LOW) {
       // INCREMENT
       if (rotaryMode == 0) {
-        setting_right_wheel_distance += increment;
+        setting_right_wheel_distance += rotary_increment;
       }
       else if (rotaryMode == 1) {
-        setting_right_wheel_speed += increment;
+        setting_right_wheel_speed += 1;
         if (setting_right_wheel_speed > 50) setting_right_wheel_speed = 50;
       }
       else if (rotaryMode == 2) {
-        setting_left_wheel_speed += increment;
+        setting_left_wheel_speed += 1;
         if (setting_left_wheel_speed > 50) setting_left_wheel_speed = 50;
       }
       else {
-        setting_left_wheel_distance += increment;
+        setting_left_wheel_distance += rotary_increment;
       }
       report();
     }
     else {
       // DECREMENT
       if (rotaryMode == 0) {
-        setting_right_wheel_distance -= increment;
+        setting_right_wheel_distance -= rotary_increment;
       }
       else if (rotaryMode == 1) {
-        setting_right_wheel_speed -= increment;
+        setting_right_wheel_speed -= 1;
       }
       else if (rotaryMode == 2) {
-        setting_left_wheel_speed -= increment;
+        setting_left_wheel_speed -= 1;
       }
       else {
-        setting_left_wheel_distance -= increment;
+        setting_left_wheel_distance -= rotary_increment;
       }
       report();
     }
