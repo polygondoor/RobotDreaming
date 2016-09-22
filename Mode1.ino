@@ -1,6 +1,3 @@
-// holds the increment amount that the rotary controller uses
-int rotary_increment = 1;
-
 // Allows knowing if the steppers are currently activated or just waiting.
 boolean isDrawing = false;
 
@@ -30,21 +27,10 @@ void mode1_loop(){
 
     // Change increment.
     if (digitalRead(buttonIncrement) == LOW) {
-      if (rotary_increment == 1) {
-        rotary_increment = 10;
-        message("Increment 10");
-      }
-      else if (rotary_increment == 10) {
-        rotary_increment = 100; message("Increment 100");
-      }
-      else if (rotary_increment == 100) {
-        rotary_increment = 1000; message("Increment 1000");
-      }
-      else if (rotary_increment == 1000) {
-        rotary_increment = 1; message("Increment 1");
-      }
-      delay(500);
+      cycleRotaryIncrement();
+      // TODO: display rotary increment somehow
       report();
+      delay(100);
     }
 
     // Push to start

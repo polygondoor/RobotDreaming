@@ -57,3 +57,17 @@ void readRotaryEncoders() {
   rotaryEncoder1_previousRead_clkPin = rotaryEncoder1_read_clkPin; // Don’t forget this
 }
 
+void cycleRotaryIncrement(){
+  if (rotary_increment == 1) {
+    rotary_increment = 10;
+  }
+  else if (rotary_increment == 10) {
+    rotary_increment = 100; 
+  }
+  else if (rotary_increment == 100) {
+    rotary_increment = 1000;
+  }
+  else if (rotary_increment == 1000) {
+    rotary_increment = 1;
+  }
+}

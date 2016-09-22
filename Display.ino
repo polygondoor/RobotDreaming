@@ -36,9 +36,14 @@ void report() {
 
   OLEDScreen.setTextSize(1);
   OLEDScreen.setCursor(30 , 0);
-  OLEDScreen.print("Speed: 0-40");
-  OLEDScreen.setCursor(25 , 36);
-  OLEDScreen.print("Distance: mm");
+  OLEDScreen.print("Speed");
+  OLEDScreen.setCursor(10 , 36);
+  OLEDScreen.print("Dist");
+
+  OLEDScreen.setCursor(80 , 36);
+  OLEDScreen.print("inc");
+  OLEDScreen.setCursor(100 , 36);
+  OLEDScreen.print(rotary_increment);
 
   OLEDScreen.setTextSize(2);
 

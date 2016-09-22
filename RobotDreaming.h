@@ -54,8 +54,8 @@ int rotaryEncoder1_read_clkPin;
 int rotaryEncoder1_read_dtPin;
 int rotaryEncoder1_previousRead_clkPin;
 
-// TODO: better nomenclature and explanation
-int sensor1pin;
-// TODO: explain
+// Determines which of the 4 displayed values that the Rotary controller will modify
 int rotaryMode = 0;
+// holds the increment amount that the rotary controller uses
+int rotary_increment = 1;
 
