@@ -35,74 +35,41 @@ void report() {
   OLEDScreen.clearDisplay();
 
   OLEDScreen.setTextSize(1);
-  OLEDScreen.setCursor(30 , 0);
-  OLEDScreen.print("Speed");
-  OLEDScreen.setCursor(10 , 36);
-  OLEDScreen.print("Dist");
+  OLEDScreen.setCursor(36 , 0);
+  OLEDScreen.print("< speed >");
+  OLEDScreen.setCursor(39 , 28);
+  OLEDScreen.print("/ dist \\");
 
-  OLEDScreen.setCursor(80 , 36);
-  OLEDScreen.print("inc");
-  OLEDScreen.setCursor(100 , 36);
+  OLEDScreen.setCursor(50 , 18);
+  OLEDScreen.print("+");
+  OLEDScreen.setCursor(55 , 18);
   OLEDScreen.print(rotary_increment);
 
   OLEDScreen.setTextSize(2);
 
-  OLEDScreen.setCursor(70, 50);
+  // write core settings to screen
+  OLEDScreen.setTextColor(1);
+  OLEDScreen.setCursor(66, 46);
+  OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
+  OLEDScreen.setCursor(103, 3);
+  OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
+  OLEDScreen.setCursor(3, 3);
+  OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
+  OLEDScreen.setCursor(3, 46);
+  OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
 
   // mat working on mouse over for 1 encoder
   if (rotaryMode == 0) {
-    OLEDScreen.setTextColor(0);
-    OLEDScreen.fillRect(68, 48, 62, 26, 1);
-    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
-    OLEDScreen.setTextColor(1);
-    OLEDScreen.setCursor(70, 12);
-    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setCursor(0, 12);
-    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setCursor(0, 50);
-    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
+    OLEDScreen.drawRect(64, 43, 63, 20, 1);
 
   } else if (rotaryMode == 1) {
-    
-    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
-    OLEDScreen.setCursor(70, 12);
-    OLEDScreen.fillRect(68,12, 62, 16, 1);
-    OLEDScreen.setTextColor(0);
-    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setTextColor(1);
-    OLEDScreen.setCursor(0, 12);
-    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setCursor(0, 50);
-    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
+    OLEDScreen.drawRect(100,0, 28, 20, 1);
 
   } else if (rotaryMode == 2) {
-    
-    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
-    OLEDScreen.setTextColor(1);
-    OLEDScreen.setCursor(70, 12);
-    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setCursor(0, 12);
-    OLEDScreen.fillRect(0,12,62,16, 1);
-    OLEDScreen.setTextColor(0);
-    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setTextColor(1);
-    OLEDScreen.setCursor(0, 50);
-    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
+    OLEDScreen.drawRect(0,0,28,20, 1);
 
   } else if (rotaryMode == 3) {
-   
-    OLEDScreen.print(setting_right_wheel_distance); //this copies some text to the screens memory
-    OLEDScreen.setTextColor(1);
-    OLEDScreen.setCursor(70, 12);
-    OLEDScreen.print(setting_right_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setCursor(0, 12);
-    OLEDScreen.print(setting_left_wheel_speed); //this copies some text to the screens memory
-    OLEDScreen.setCursor(0, 50);
-    OLEDScreen.fillRect(0, 46 , 62, 20, 1);
-    OLEDScreen.setTextColor(0);
-    OLEDScreen.print(setting_left_wheel_distance); //this copies some text to the screens memory
-    OLEDScreen.setTextColor(1);
-    
+    OLEDScreen.drawRect(0, 43 , 63, 20, 1);
   }
 
   OLEDScreen.display();
