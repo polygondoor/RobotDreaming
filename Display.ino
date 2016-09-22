@@ -15,8 +15,8 @@ void setupDisplay(){
 
   // Write "ARTBOT" in big
   OLEDScreen.setTextSize(3);
-  OLEDScreen.setCursor(10, 10); // this moves our cursor right back to the top left pixel.. we should talk about this.
-  OLEDScreen.print("ARTBOT"); //this copies some text to the screens memory
+  OLEDScreen.setCursor(20, 10); // this moves our cursor right back to the top left pixel.. we should talk about this.
+  OLEDScreen.print("PABLO"); //this copies some text to the screens memory
 
   // Write "Hello" in small
   OLEDScreen.setTextSize(2);
