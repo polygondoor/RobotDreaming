@@ -95,9 +95,17 @@ long distanceToSteps(long mm) {
 void stopAndResetSteppers() {
   // stop everything
   stepper_r.stop(); // Stop as fast as possible: sets new target
-  stepper_r.runToPosition();
   stepper_l.stop(); // Stop as fast as possible: sets new target
-  stepper_l.runToPosition();
+   
+  // set fast accelerations
+  stepper_l.setAcceleration(200);
+  stepper_r.setAcceleration(200);  
+  
+  // leep going until everything has stopper
+  while(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
+    stepper_l.run();
+    stepper_r.run();
+  }
 
   // reset the steppers to position 0
   stepper_r.setCurrentPosition(0);
@@ -107,3 +115,9 @@ void stopAndResetSteppers() {
   isDrawing = false;
   delay(1000);
 }
+
+
+
+
+
+
