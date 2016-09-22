@@ -78,7 +78,15 @@ void report() {
 void message(String text) {
   OLEDScreen.clearDisplay();
   OLEDScreen.setTextSize(1);
-  OLEDScreen.setCursor(20, 40);
+  OLEDScreen.setCursor(20, 20);
+  OLEDScreen.print(text); //this copies some text to the screens memory
+  OLEDScreen.display();
+}
+
+void messageLarge(String text) {
+  OLEDScreen.clearDisplay();
+  OLEDScreen.setTextSize(2);
+  OLEDScreen.setCursor(20, 20);
   OLEDScreen.print(text); //this copies some text to the screens memory
   OLEDScreen.display();
 }
@@ -86,7 +94,7 @@ void message(String text) {
 void message(int text) {
   OLEDScreen.clearDisplay();
   OLEDScreen.setTextSize(1);
-  OLEDScreen.setCursor(20, 40);
+  OLEDScreen.setCursor(20, 20);
   OLEDScreen.print(text); //this copies some text to the screens memory
   OLEDScreen.display();
 }

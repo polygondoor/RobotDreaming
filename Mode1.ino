@@ -63,7 +63,7 @@ void mode1_loop(){
 
     // Push to stop
     if (digitalRead(buttonStart) == LOW) {
-      message("Stop!");
+      messageLarge("Stop!");
       stopAndResetSteppers();
       report();
     }
