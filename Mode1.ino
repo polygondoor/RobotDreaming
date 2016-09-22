@@ -15,12 +15,21 @@ void mode1_loop(){
 
     // Choose preset
     if (digitalRead(buttonPresets) == LOW) {
-      // change preset
+      // increment preset_index
+      preset_index = preset_index + 1;
 
-      // increment preset number
+      // check if at end of preset length, wrap
+      if (preset_index >= (sizeof (presets) / sizeof (*presets)) ){
+        preset_index = 0;
+      }
 
-      // check if at end of preset length
+      // make sure preset values are captured
+      setting_left_wheel_distance = presets[preset_index][0]; 
+      setting_left_wheel_speed = presets[preset_index][1];   // in mm
+      setting_right_wheel_speed = presets[preset_index][2];  // arbitrary scale
+      setting_right_wheel_distance = presets[preset_index][3]; // in mm
 
+      delay(200);
       // display new settings on little screen
       report();
     }
@@ -30,7 +39,7 @@ void mode1_loop(){
       cycleRotaryIncrement();
       // TODO: display rotary increment somehow
       report();
-      delay(100);
+      delay(150);
     }
 
     // Push to start

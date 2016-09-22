@@ -58,4 +58,6 @@ int rotaryEncoder1_previousRead_clkPin;
 int rotaryMode = 0;
 // holds the increment amount that the rotary controller uses
 int rotary_increment = 1;
+// current index of preset array
+int preset_index = -1;
 
