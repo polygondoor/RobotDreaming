@@ -1,5 +1,18 @@
+// Include libraries for drawing to the OLED screen
+#include <Adafruit_GFX.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_SSD1306.h>
+
+// Include libraries for the stepper motors
+#include <AccelStepper.h>
+#include <AFMotor.h>
+
+
+
 /* Polygon Door Robot Dreaming */
 #include "RobotDreaming.h"
+#include "Presets.h"
 
 void setup()
 {

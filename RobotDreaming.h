@@ -1,14 +1,3 @@
-#include "Presets.h"
-// Include libraries for drawing to the OLED screen
-#include <Adafruit_GFX.h>
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_SSD1306.h>
-
-// Include libraries for the stepper motors
-#include <AccelStepper.h>
-#include <AFMotor.h>
-
 // Declare the motors (for AFMotor lib)
 AF_Stepper motor1(2048, 1);
 AF_Stepper motor2(2048, 2);
