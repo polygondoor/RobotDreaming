@@ -38,9 +38,10 @@ void loop() {
   // turn
   turn_wheels_mm(250, -250);
 
-  // make a spiral!
+  turn_wheels_mm(2500, -1000);
+
   for (int i = 20 ; i > 0 ; i--) {
-  	turn_wheels_mm(20, i);
+    turn_wheels_mm(20, i);
   }
 
   message("DONE!");

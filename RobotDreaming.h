@@ -5,17 +5,17 @@ AF_Stepper motor2(2048, 2);
 // These methods are used as 'wrappers' so that we can use 2 motor libraries together
 // Note that each step can be SINGLE, DOUBLE, INTERLEAVE or MICROSTEP
 void forwardstep1() {
-  motor1.onestep(FORWARD, DOUBLE);
+  motor1.onestep(FORWARD, SINGLE);
 }
 void backwardstep1() {
-  motor1.onestep(BACKWARD, DOUBLE);
+  motor1.onestep(BACKWARD, SINGLE);
 }
 // wrappers for the second motor!
 void forwardstep2() {
-  motor2.onestep(BACKWARD, DOUBLE);
+  motor2.onestep(BACKWARD, SINGLE);
 }
 void backwardstep2() {
-  motor2.onestep(FORWARD, DOUBLE);
+  motor2.onestep(FORWARD, SINGLE);
 }
 
 // Declare the AccelStepper motors (which 'wrap' the AFMotor lib motors)

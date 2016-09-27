@@ -22,6 +22,7 @@ void readRotaryEncoders() {
       // INCREMENT
       if (rotaryMode == 0) {
         setting_right_wheel_distance += rotary_increment;
+        if (setting_right_wheel_distance > 99999) setting_right_wheel_distance = 99999;
       }
       else if (rotaryMode == 1) {
         setting_right_wheel_speed += 1;
@@ -33,6 +34,7 @@ void readRotaryEncoders() {
       }
       else {
         setting_left_wheel_distance += rotary_increment;
+        if (setting_left_wheel_distance > 99999) setting_left_wheel_distance = 99999;
       }
       report();
     }
