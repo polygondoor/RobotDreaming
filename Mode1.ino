@@ -13,6 +13,23 @@ void mode1_loop(){
       delay(500);
     }
 
+    // Choose drawingMode
+    if (digitalRead(buttonDrawingMode) == LOW) {
+
+    }
+
+    // Change increment.
+    if (digitalRead(buttonIncThousands) == LOW) {
+      rotary_increment = 1000; report();
+      // cycleRotaryIncrement();
+    } else if (digitalRead(buttonIncHundreds) == LOW){
+      rotary_increment = 100;  report();
+    } else if (digitalRead(buttonIncTens) == LOW){
+      rotary_increment = 10;  report();
+    } else if (digitalRead(buttonIncOnes) == LOW){
+      rotary_increment = 1;  report();
+    }
+
     // Choose preset
     if (digitalRead(buttonPresets) == LOW) {
       // increment preset_index
@@ -32,14 +49,6 @@ void mode1_loop(){
       delay(200);
       // display new settings on little screen
       report();
-    }
-
-    // Change increment.
-    if (digitalRead(buttonIncrement) == LOW) {
-      cycleRotaryIncrement();
-      // TODO: display rotary increment somehow
-      report();
-      delay(150);
     }
 
     // Push to start

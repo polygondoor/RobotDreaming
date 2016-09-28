@@ -29,10 +29,17 @@ long setting_left_wheel_speed = 35;		// in mm
 long setting_left_wheel_distance = 100;	// arbitrary scale
 
 // button pin positions
-int buttonStart = 23;
-int buttonPresets = 27;
-int buttonIncrement = 25;
-int buttonMode = 27;
+int buttonIncThousands= 22;		// K0: 22
+int buttonIncHundreds = 23;		// K1: 23
+int buttonIncTens     = 24;		// K2: 24
+int buttonIncOnes	  = 25;	 	// K3: 25
+
+int buttonDrawingMode = 26;		// K4: 26
+int buttonUnused = 27;			// K5: 27
+int buttonPresets = 28;			// K6: 28
+int buttonStart = 29;			// K7: 29
+
+// boolean buttonStart_toggle = 
 
 // Many values are required for the action of the rotary controllers
 // TODO: Can these be abstracted out to a separate class or file?
@@ -47,6 +54,8 @@ int rotaryEncoder1_previousRead_clkPin;
 int rotaryMode = 0;
 // holds the increment amount that the rotary controller uses
 int rotary_increment = 1;
+// current index of drawingMode
+int drawingMode_index = -1;
 // current index of preset array
 int preset_index = -1;
 
