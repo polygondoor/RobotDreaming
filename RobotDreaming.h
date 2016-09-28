@@ -1,3 +1,14 @@
+#include "Presets.h"
+// Include libraries for drawing to the OLED screen
+#include <Adafruit_GFX.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_SSD1306.h>
+
+// Include libraries for the stepper motors
+#include <AccelStepper.h>
+#include <AFMotor.h>
+
 // Declare the motors (for AFMotor lib)
 AF_Stepper motor1(2048, 1);
 AF_Stepper motor2(2048, 2);
@@ -39,10 +50,10 @@ int buttonUnused = 27;			// K5: 27
 int buttonPresets = 28;			// K6: 28
 int buttonStart = 29;			// K7: 29
 
-// boolean buttonStart_toggle = 
+// toggle button states
+int buttonDrawingMode_state = 0;
 
 // Many values are required for the action of the rotary controllers
-// TODO: Can these be abstracted out to a separate class or file?
 int rotaryEncoder1_set_clkPin = 49;
 int rotaryEncoder1_set_dtPin = 47;
 int rotaryEncoder1_set_btnPin = 45;
@@ -55,7 +66,7 @@ int rotaryMode = 0;
 // holds the increment amount that the rotary controller uses
 int rotary_increment = 1;
 // current index of drawingMode
-int drawingMode_index = -1;
+int drawingMode = 0;
 // current index of preset array
 int preset_index = -1;
 

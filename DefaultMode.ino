@@ -1,8 +1,27 @@
 // Allows knowing if the steppers are currently activated or just waiting.
 boolean isDrawing = false;
 
-void mode1_loop(){
+void setup()
+{
+  setupDisplay();  
+  setupRotaryEncoder();
+  setupButtons();
+}
+
+void loop(){
   
+  // check which mode we are
+  if (drawingMode == 0) {
+    default_mode();
+  } else if ( drawingMode == 1) {
+    mode_1();
+    report(); // this ensures that the screen re-displays what is going on in default mode
+  }
+
+}
+
+void default_mode(){
+
   if (!isDrawing) {
     readRotaryEncoders();
 
@@ -10,24 +29,22 @@ void mode1_loop(){
     if (digitalRead(rotaryEncoder1_set_btnPin) == LOW) {
       rotaryMode = (rotaryMode + 1) % 4;
       report();
-      delay(500);
+      delay(300);
     }
 
     // Choose drawingMode
-    if (digitalRead(buttonDrawingMode) == LOW) {
-
-    }
+    readModeButton();
 
     // Change increment.
     if (digitalRead(buttonIncThousands) == LOW) {
       rotary_increment = 1000; report();
       // cycleRotaryIncrement();
     } else if (digitalRead(buttonIncHundreds) == LOW){
-      rotary_increment = 100;  report();
+      rotary_increment = 100; report();
     } else if (digitalRead(buttonIncTens) == LOW){
-      rotary_increment = 10;  report();
+      rotary_increment = 10; report();
     } else if (digitalRead(buttonIncOnes) == LOW){
-      rotary_increment = 1;  report();
+      rotary_increment = 1; report();
     }
 
     // Choose preset
@@ -46,9 +63,8 @@ void mode1_loop(){
       setting_right_wheel_speed = presets[preset_index][2];  // arbitrary scale
       setting_right_wheel_distance = presets[preset_index][3]; // in mm
 
-      delay(200);
-      // display new settings on little screen
       report();
+      delay(200);
     }
 
     // Push to start
@@ -56,26 +72,54 @@ void mode1_loop(){
       isDrawing = true;
       displayStartMessage();
       captureSettings();
+      report();
     }
 
   } else {
+
+    // Bounce the right wheel direction
     if (stepper_r.distanceToGo() == 0) {
-      // Bounce the right wheel direction
       stepper_r.moveTo(-stepper_r.currentPosition());
     }
+
+    // Bounce the left wheel direction
     if (stepper_l.distanceToGo() == 0) {
-      // Bounce the left wheel direction
       stepper_l.moveTo(-stepper_l.currentPosition());
     }
-    stepper_r.run();
-    stepper_l.run();
 
-    // Push to stop
+    // Look for stop button
     if (digitalRead(buttonStart) == LOW) {
       messageLarge("Stop!");
       stopAndResetSteppers();
       report();
     }
 
+    // Go!
+    stepper_r.run();
+    stepper_l.run();
+
+  }
+}
+
+bool waitForStartButton(){
+  // Push to start
+  return (digitalRead(buttonStart) == HIGH);
+}
+
+void readModeButton(){
+  if ( digitalRead(buttonDrawingMode) == LOW ) {
+    // mode button pressed
+
+    if ( buttonDrawingMode_state == 0) {
+      // if we get here then it is a fresh push
+      
+      buttonDrawingMode_state = 1;
+      drawingMode ++;
+      if (drawingMode > 1) drawingMode = 0;
+    } 
+
+  } else {
+    // mode button unpressed, 
+    buttonDrawingMode_state = 0;
   }
 }
