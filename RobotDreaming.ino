@@ -1,7 +1,7 @@
 /* Polygon Door Robot Dreaming */
 #include "RobotDreaming.h"
 
-void mode_1(){
+void customDrawingMode(){
 
   // A custom mode example
   message("Custom Mode. Press Start");

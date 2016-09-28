@@ -14,7 +14,7 @@ void loop(){
   if (drawingMode == 0) {
     default_mode();
   } else if ( drawingMode == 1) {
-    mode_1();
+    customDrawingMode();
     report(); // this ensures that the screen re-displays what is going on in default mode
   }
 
