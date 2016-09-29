@@ -101,6 +101,9 @@ void default_mode(){
   }
 }
 
+/*
+ * Waits for start button to be pressed
+ */
 bool waitForStartButton(){
   // Push to start
   return (digitalRead(buttonStart) == HIGH);
