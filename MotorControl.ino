@@ -43,7 +43,6 @@ void captureSettings() {
   stepper_l.moveTo(steps);
 }
 
-
 float speed_l;
 float speed_r;
 /*
@@ -52,6 +51,27 @@ float speed_r;
  */
 void turn_wheels_mm(long distance_l, long distance_r, float top_speed){
 
+  set_wheels_mm(distance_l, distance_r, top_speed);
+
+  // Could make the check "> 1" so that the infinitesimal stop is not perceivable
+  while(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
+    stepper_l.run();
+    stepper_r.run();
+  }
+
+  // reset the steppers to position 0
+  stepper_r.setCurrentPosition(0);
+  stepper_l.setCurrentPosition(0);
+}
+
+void turn_wheels_mm(long distance_l, long distance_r){
+  turn_wheels_mm( distance_l, distance_r, 300.0);
+}
+
+/*
+ * Sets the wheels to turn without turning them
+ */
+void set_wheels_mm(long distance_l, long distance_r,  float top_speed) {
   // calculate if there is a differential in the speeds
   if (abs(distance_l) >= abs(distance_r) ) {
     speed_l = top_speed;
@@ -69,22 +89,33 @@ void turn_wheels_mm(long distance_l, long distance_r, float top_speed){
 
   stepper_l.moveTo(distanceToSteps(distance_l));
   stepper_r.moveTo(distanceToSteps(distance_r));
+}
 
-  // Could make the check "> 1" so that the infinitesimal stop is not perceivable
-  while(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
+void set_wheels_mm(long distance_l, long distance_r){
+  set_wheels_mm( distance_l, distance_r, 300.0);
+}
+
+/*
+ * Allows finding out when wheels should be stopped.
+ */ 
+bool wheels_still_turning(){
+    // Could make the check "> 1" so that the infinitesimal stop is not perceivable
+  if(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
     stepper_l.run();
     stepper_r.run();
+    return true;
+  } else {
+    // reset the steppers to position 0
+    stepper_r.setCurrentPosition(0);
+    stepper_l.setCurrentPosition(0);
+    return false;
   }
 
-  // reset the steppers to position 0
-  stepper_r.setCurrentPosition(0);
-  stepper_l.setCurrentPosition(0);
 }
 
-void turn_wheels_mm(int distance_l, int distance_r){
-  turn_wheels_mm( distance_l, distance_r, 400.0);
-}
-
+/*
+ * Converts distance covered by wheel into steps for stepper driver.
+ */ 
 long distanceToSteps(long mm) {
   return mm * 2048 / (wheelDiam * 3.1416);
 }

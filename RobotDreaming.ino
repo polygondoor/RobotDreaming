@@ -27,6 +27,18 @@ void customDrawingMode(){
     turn_wheels_mm(20, i);
   }
 
+  // Test of the manual mode
+  set_wheels_mm(250, 250);
+  while ( wheels_still_turning() ) {
+
+    // play a sound dependent on how far to go ... or
+    tone (12, stepper_l.distanceToGo());
+
+    // play a sound dependent on the current speed
+    tone (12, stepper_l.speed());   
+
+  }
+
   // Display another message
   message("DONE!");
 
