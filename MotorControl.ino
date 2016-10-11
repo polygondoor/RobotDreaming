@@ -54,7 +54,7 @@ void turn_wheels_mm(long distance_l, long distance_r, float top_speed){
   set_wheels_mm(distance_l, distance_r, top_speed);
 
   // Could make the check "> 1" so that the infinitesimal stop is not perceivable
-  while(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
+  while(stepper_l.distanceToGo() != 0 || stepper_r.distanceToGo() != 0){
     stepper_l.run();
     stepper_r.run();
   }
@@ -100,7 +100,7 @@ void set_wheels_mm(long distance_l, long distance_r){
  */ 
 bool wheels_still_turning(){
     // Could make the check "> 1" so that the infinitesimal stop is not perceivable
-  if(stepper_l.distanceToGo() > 0 || stepper_r.distanceToGo() > 0){
+  if(stepper_l.distanceToGo() != 0 || stepper_r.distanceToGo() != 0){
     stepper_l.run();
     stepper_r.run();
     return true;
